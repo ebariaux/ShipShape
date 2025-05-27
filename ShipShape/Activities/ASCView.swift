@@ -17,6 +17,7 @@ struct ASCView: View {
     @State private var loadState = LoadState.loading
 
     @State private var isShowingDebugInput = false
+    @State private var isShowingSalesReportsDownloads = false
     @AppStorage("debugURL") private var debugURL = ""
 
     var body: some View {
@@ -36,6 +37,7 @@ struct ASCView: View {
                     NavigationLink("Nominations", value: AppSection.nominations)
                     NavigationLink("Performance Metrics", value: AppSection.performanceMetrics)
                     NavigationLink("Reviews", value: AppSection.customerReviews)
+                    NavigationLink("Sales Reports", value: AppSection.salesReports)
                     NavigationLink("Screenshots", value: AppSection.screenshots)
                     NavigationLink("Subscriptions", value: AppSection.subscriptions)
                     NavigationLink("Versions", value: AppSection.versions)
@@ -56,6 +58,7 @@ struct ASCView: View {
                     case .localizations: LocalizationsView(app: selectedApp)
                     case .nominations: NominationsView(app: selectedApp)
                     case .performanceMetrics: PerformanceMetricsView(app: selectedApp)
+                    case .salesReports: SalesReportsView(app: selectedApp)
                     case .screenshots: ScreenshotsView(app: selectedApp)
                     case .subscriptions: SubscriptionsView(app: selectedApp)
                     case .versions: VersionsView(app: selectedApp)
@@ -74,6 +77,9 @@ struct ASCView: View {
         .environment(client)
         .task(load)
         .toolbar {
+            Button("Download Sales Reports") {
+                isShowingSalesReportsDownloads = true
+            }
             Button("Make Debug Request") {
                 isShowingDebugInput = true
             }
@@ -84,6 +90,9 @@ struct ASCView: View {
             TextField("Enter a URL", text: $debugURL)
         } message: {
             Text("This will fetch the URL and print it to the debug console, then trigger a crash.")
+        }
+        .sheet(isPresented: $isShowingSalesReportsDownloads) {
+            DownloadSalesReportsView(client: client)
         }
     }
 

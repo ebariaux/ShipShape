@@ -135,4 +135,36 @@ extension ASCClient {
         let response = try await get(url, as: ASCAppNominationResponse.self)
         apps[appIndex].nominations = response.data
     }
+
+    /// Retrieve all daily sales summary reports between the given dates and store them in files.
+    func retrieveSalesReports(vendorNumber: String, reportDate: Date, skipExisting: Bool = false) async throws {
+        let dateFormatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.dateFormat = "yyyy-MM-dd"
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
+            return formatter
+        }()
+
+        let reportType = "SALES"
+        let reportSubType = "SUMMARY"
+        let reportFrequency = "DAILY"
+        let reportDateAsString = dateFormatter.string(from: reportDate)
+
+        let fileName = "SalesReport-\(reportType)-\(reportSubType)-\(reportFrequency)-\(reportDateAsString).txt.gz"
+
+        guard !(skipExisting && FileManager.default.fileExists(atPath: fileName)) else {
+            return
+        }
+        let url = """
+                  /v1/salesReports?filter[reportType]=\(reportType)\
+                  &filter[reportSubType]=\(reportSubType)\
+                  &filter[frequency]=\(reportFrequency)\
+                  &filter[vendorNumber]=\(vendorNumber)\
+                  &filter[reportDate]=\(reportDateAsString)
+                  """
+print("Download \(url)")
+        let result = try await get(url)
+        try result.write(to: URL(filePath: fileName))
+    }
 }

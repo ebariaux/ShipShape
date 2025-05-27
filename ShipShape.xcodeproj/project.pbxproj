@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		51616E862DD8F5FA007B8250 /* JWTKit in Frameworks */ = {isa = PBXBuildFile; productRef = 51616E852DD8F5FA007B8250 /* JWTKit */; };
+		91DD533D2DE37C5C00957233 /* SwiftGzip in Frameworks */ = {isa = PBXBuildFile; productRef = 91DD533C2DE37C5C00957233 /* SwiftGzip */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91DD533D2DE37C5C00957233 /* SwiftGzip in Frameworks */,
 				51616E862DD8F5FA007B8250 /* JWTKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -97,6 +99,7 @@
 			name = ShipShape;
 			packageProductDependencies = (
 				51616E852DD8F5FA007B8250 /* JWTKit */,
+				91DD533C2DE37C5C00957233 /* SwiftGzip */,
 			);
 			productName = ShipShape;
 			productReference = 51616E6E2DD8EDE8007B8250 /* ShipShape.app */;
@@ -156,6 +159,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				51616E842DD8F5FA007B8250 /* XCRemoteSwiftPackageReference "jwt-kit" */,
+				91DD533B2DE37C5C00957233 /* XCRemoteSwiftPackageReference "swift-gzip" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 51616E6F2DD8EDE8007B8250 /* Products */;
@@ -548,6 +552,14 @@
 				minimumVersion = 5.1.2;
 			};
 		};
+		91DD533B2DE37C5C00957233 /* XCRemoteSwiftPackageReference "swift-gzip" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mihai8804858/swift-gzip";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -555,6 +567,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 51616E842DD8F5FA007B8250 /* XCRemoteSwiftPackageReference "jwt-kit" */;
 			productName = JWTKit;
+		};
+		91DD533C2DE37C5C00957233 /* SwiftGzip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 91DD533B2DE37C5C00957233 /* XCRemoteSwiftPackageReference "swift-gzip" */;
+			productName = SwiftGzip;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

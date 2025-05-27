@@ -45,8 +45,8 @@ class ASCClient {
         self.session = session
     }
 
-    /// Fetches an App Store Connect API and decodes it to a specific type.
-    func get<T: Decodable>(_ urlString: String, as type: T.Type) async throws -> T {
+    /// Fetches an App Store Connect API and returns the raw data
+    func get(_ urlString: String) async throws -> Data {
         guard let url = URL(string: "https://api.appstoreconnect.apple.com\(urlString)") else {
             fatalError("Malformed URL: \(urlString)")
         }
@@ -56,6 +56,12 @@ class ASCClient {
         var request = URLRequest(url: url)
         request.setValue("Bearer \(jwt)", forHTTPHeaderField: "authorization")
         let (result, _) = try await session.data(for: request, delegate: nil)
+        return result
+    }
+
+    /// Fetches an App Store Connect API and decodes it to a specific type.
+    func get<T: Decodable>(_ urlString: String, as type: T.Type) async throws -> T {
+        let result = try await get(urlString)
 
         // Log the JSON we get back, for inspection purposes.
         if let stringResult = String(data: result, encoding: .utf8) {

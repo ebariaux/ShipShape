@@ -1,5 +1,5 @@
 {
-  "originHash" : "4ac0b92ccb936bba546eff8a4e1185cc604dab72244a91b9da418cdcd1872b78",
+  "originHash" : "8a1e0b834fd793121a23f8a8d736ecb234ba03fca6cde054be92eebbc6ed7b7d",
   "pins" : [
     {
       "identity" : "jwt-kit",
@@ -35,6 +35,15 @@
       "state" : {
         "revision" : "e8d6eba1fef23ae5b359c46b03f7d94be2f41fed",
         "version" : "3.12.3"
+      }
+    },
+    {
+      "identity" : "swift-gzip",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mihai8804858/swift-gzip",
+      "state" : {
+        "revision" : "a01e2bc547eabea00d42666df39d40b022de4983",
+        "version" : "1.2.0"
       }
     },
     {
